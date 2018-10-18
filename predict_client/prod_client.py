@@ -6,6 +6,15 @@ from predict_client.pbs.prediction_service_pb2 import PredictionServiceStub
 from predict_client.pbs.predict_pb2 import PredictRequest
 from predict_client.util import predict_response_to_dict, make_tensor_proto
 
+import grpc.beta.implementations
+from grpc._cython import cygrpc
+
+def insecure_channel(host, port):
+        channel = grpc.insecure_channel(
+            target=host if port is None else '%s:%d' % (host, port),
+            options=[(cygrpc.ChannelArgKey.max_send_message_length, -1),
+                     (cygrpc.ChannelArgKey.max_receive_message_length, -1)])
+        return grpc.beta.implementations.Channel(channel)
 
 class ProdClient:
     def __init__(self, host, model_name, model_version):

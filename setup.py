@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='predict-client',
-    version='1.7.2',
+    version='1.7.3',
     description='Client used to send grcp requests to a tfserving model',
     url='https://github.com/epigramai/tfserving_predict_client',
     author='Stian Lind Petlund',
